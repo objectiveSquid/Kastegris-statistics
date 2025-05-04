@@ -1,6 +1,5 @@
 # Kastegris statistics
 With this repository I hope to find the optimial playing strategy for the game **<i>Kastegris</i>** also known as **<i>Pass the pigs</i>**.
-Currently this repository does not take into account the extended rules of the game.
 
 ## Symbols in the datasets
 - **\-----** (5 dashes) = instant loss<br>

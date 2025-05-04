@@ -1,14 +1,16 @@
 from statistics_types import ActionSymbol, Action, RoundResult
+from config import DEFAULT_SIMULATION_REPEATS
 
+import statistics
 import random
 
 
-def avg(values: list[float]) -> float:
-    return sum(values) / len(values)
-
-
 class Statistics:
-    def __init__(self, actions: list[Action]) -> None:
+    def __init__(
+        self,
+        actions: list[Action],
+        simulation_repeats: int = DEFAULT_SIMULATION_REPEATS,
+    ) -> None:
         self.actions = actions
         self.actions_count = len(actions)
 
@@ -43,7 +45,7 @@ class Statistics:
         self.chance_of_reset_score = None
         self.chance_of_lose_game = None
 
-        self.run_stats()
+        self.run_stats(simulation_repeats)
 
     def simulate_round(self) -> RoundResult:
         result = RoundResult()
@@ -63,15 +65,15 @@ class Statistics:
         round_results = self.simulate_many_rounds(num_rounds)
 
         return RoundResult(
-            avg([round_result.points for round_result in round_results]),
-            avg([round_result.length for round_result in round_results]),
+            statistics.fmean([round_result.points for round_result in round_results]),
+            statistics.fmean([round_result.length for round_result in round_results]),
         )
 
-    def run_stats(self) -> None:
-        self.average_point_gain = avg(
+    def run_stats(self, simulation_repeats: int = DEFAULT_SIMULATION_REPEATS) -> None:
+        self.average_point_gain = statistics.fmean(
             [action.value for action in self.increase_score_actions]
         )
-        average_many_rounds_output = self.average_many_rounds(1000)
+        average_many_rounds_output = self.average_many_rounds(simulation_repeats)
         self.average_round_length = average_many_rounds_output.length
         self.average_round_point_gain = average_many_rounds_output.points
 
@@ -88,13 +90,13 @@ class Statistics:
     def __repr__(self) -> str:
         return "\n".join(
             [
-                f"Average point gain: {round(self.average_point_gain, 2)}",
-                f"Average round length: {round(self.average_round_length, 2)}",
-                f"Average round point gain: {round(self.average_round_point_gain, 2)}",
-                f"Chance of point gain: {round(self.chance_of_point_gain, 2)}",
-                f"Chance of any round stop: {round(self.chance_of_any_round_stop, 2)}",
-                f"Chance of round stop: {round(self.chance_of_round_stop, 2)}",
-                f"Chance of reset score: {round(self.chance_of_reset_score, 2)}",
-                f"Chance of lose game: {round(self.chance_of_lose_game, 2)}",
+                f"[ STAT ] Average point gain: {round(self.average_point_gain, 2)}",
+                f"[ SIM ]  Average round length: {round(self.average_round_length, 2)}",
+                f"[ SIM ]  Average round point gain: {round(self.average_round_point_gain, 2)}",
+                f"[ STAT ] Chance of point gain: {round(self.chance_of_point_gain, 2)}",
+                f"[ STAT ] Chance of any round stop: {round(self.chance_of_any_round_stop, 2)}",
+                f"[ STAT ] Chance of round stop: {round(self.chance_of_round_stop, 2)}",
+                f"[ STAT ] Chance of reset score: {round(self.chance_of_reset_score, 2)}",
+                f"[ STAT ] Chance of lose game: {round(self.chance_of_lose_game, 2)}",
             ]
         )

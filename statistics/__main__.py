@@ -1,4 +1,5 @@
 from statistics_types import ActionSymbol, Action
+from config import DEFAULT_SIMULATION_REPEATS
 from stats import Statistics
 
 import argparse
