@@ -17,5 +17,6 @@ class Action:
 
 @dataclasses.dataclass()
 class RoundResult:
-    points: float = 0
+    total_points: float = 0
+    final_points: float = 0
     length: float = 0

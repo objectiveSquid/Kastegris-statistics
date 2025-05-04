@@ -1,5 +1,6 @@
 # Kastegris statistics
 With this repository I hope to find the optimial playing strategy for the game **<i>Kastegris</i>** also known as **<i>Pass the pigs</i>**.
+So far I've come to the conclusion that you should when after getting over around 32 points in a round for optimal results.
 
 ## Symbols in the datasets
 - **\-----** (5 dashes) = instant loss<br>
