@@ -1,3 +1,4 @@
+# 250 data entries, rolled on my desk, thus a relatively small rolling length
 -
 20
 1
