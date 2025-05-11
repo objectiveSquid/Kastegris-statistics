@@ -188,7 +188,7 @@ class Statistics:
         return "\n".join(
             [
                 # dataset info
-                f" --- Dataset information ---"
+                f" --- Dataset information ---",
                 f"[ DATA ] Total actions count: {self.actions_count}",
                 f"[ DATA ] Increase score actions count: {self.increase_score_actions_count}",
                 f"[ DATA ] Any round stop actions count: {self.any_round_stop_actions_count}",
